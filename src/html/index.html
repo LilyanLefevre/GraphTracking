@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="&fr">
+<head>
+    <title>Tracking data viewer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="../script/LogEvent.js"></script>
+    <script src="../script/Schedule.js"></script>
+    <script src="../script/TeamWorkDay.js"></script>
+    <script src="../script/external/chart.min.js"></script>
+    <script src="../script/external/luxon@^2.js"></script>
+    <script src="../script/external/chartjs-adapter-luxon.js"></script>
+    <script src="../script/external/hammerjs@2.0.8.js"></script>
+    <script src="../script/external/chartjs-plugin-zoom.min.js"></script>
+    <script type="module" src="../script/index.js"></script>
+    
+</head> 
+<body>
+    
+    <!-- Header -->
+    <header class="w3-display-container w3-margin">
+        <h1>Tracking data viewer</h1>
+    </header>
+    
+    <!-- Page content -->
+    <div class="w3-padding-large w3-margin-top">
+        <form class="w3-right" style="display: flex; width: 25%; flex-direction: column; align-items: flex-start;" onsubmit="return false;" >
+            <div style="width:100%" class="w3-margin">
+                <div style="margin: 10px;">
+                    <label for="id">ID de l'appareil (/!\maj.):</label>
+                    <input type="text" id="deviceID" name="id" placeholder="Entrez l'ID de l'appareil" value="m26516m-test5">
+                </div>
+                <div style="margin: 10px;">
+                    <input type="button" id="confirmID" value="Confirmer ID">
+                </div>
+                <div style="margin: 10px;">
+                    <label for="day">Filtrer une date :</label>
+                    <input type="date" name="day" id="dayFilter">
+                </div>
+                <div style="margin: 10px;">
+                    <label for="schelude">Filtrer par tournée :</label>
+                    <select name="schelude" id="scheduleSelect">
+                        <option value="-1">--All--</option>
+                        <option value="0">Matin</option>
+                        <option value="1">Après-midi</option>
+                        <option value="2" disabled>Nuit</option>
+                    </select>
+                </div>
+                <div style="margin: 10px;">
+                    <label for="day">Filtrer une semaine :</label>
+                    <input type="week" name="week" id="weekFilter">
+                </div>
+                <div style="margin: 10px;">
+                    <input type="button" id="computeRate" value="Calculer les taux d'utilisation">
+                </div>
+                <div style="margin: 10px;">
+                    <h5 style="font-weight: bold; margin-bottom: 10px; margin-top: 20px">
+                        Mouvement sur la période donnée : 
+                        <span style="font-weight: normal;" id="moveRate"></span>
+                    </h5>
+                    
+                    <h5 style="font-weight: bold; margin-bottom: 10px; margin-top: 20px">
+                        Chargement sur la période donnée : 
+                        <span style="font-weight: normal;" id="loadRate"></span>
+                    </h5>
+                    
+                </div>
+            </div>
+        </form>
+        
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <div style="width: 100%; margin-bottom: 40px; border: 2px solid black; border-radius: 20px; padding: 20px; box-shadow: 1px 1px 11px #aaa;">
+                <span id="movePeriod" style="display: block;">Aucune donnée</span>
+                <canvas id="moveChart"></canvas>
+                <input type="button" id="resetZoomMove" value="Reset zoom">
+            </div>
+            <div style="width: 100%; border: 2px solid black; border-radius: 20px; padding: 20px; box-shadow: 1px 1px 12px #aaa;">
+                <span id="loadPeriod" style="display: block;">Aucune donnée</span>
+                <canvas id="loadChart"></canvas>
+                <input type="button" id="resetZoomLoad" value="Reset zoom">
+            </div>
+        </div>        
+        <!-- End page content -->
+    </div>
+    
+</body>
+</html>
